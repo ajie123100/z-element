@@ -8,6 +8,7 @@ import Icon from "./components/Icon/Icon.vue";
 import Alert from "./components/Alert/Alert.vue";
 import Tooltip from "./components/Tooltip/Tooltip.vue";
 import Dropdown from "./components/Dropdown/Dropdown";
+import Message from "./components/Message/Message.vue";
 import type { ButtonInstance } from "./components/Button/types";
 import type { NameType } from "./components/Collapse/types";
 import type { DropdownInstance, MenuOption } from "./components/Dropdown/types";
@@ -49,6 +50,7 @@ const openedValue = ref<NameType[]>(["a"]);
 </script>
 
 <template>
+  <Message message="hello message" :duration="0" show-close />
   <header>
     <Tooltip content="hell world" placement="right" trigger="hover">
       <img src="./assets/logo.svg" width="125" height="125" ref="triggerNode">
