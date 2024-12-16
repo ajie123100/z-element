@@ -42,7 +42,7 @@ onMounted(() => {
   }, 2000)
 });
 const handleClick = () => {
-  alert("123");
+  alert("12345");
 };
 const openedValue = ref<NameType[]>(["a"]);
 
