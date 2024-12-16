@@ -1,0 +1,94 @@
+.z-alert {
+    --z-alert-padding: 8px 16px;
+    --z-alert-border-radius-base: var(--z-border-radius-base);
+    --z-alert-content-font-size: var(--z-font-size-base);
+    --z-alert-title-font-size: var(--z-font-size-base);
+    --z-alert-content-with-description-font-size: var(--z-font-size-medium);
+    --z-alert-description-font-size: var(--z-font-size-base);
+    --z-alert-close-font-size: var(--z-font-size-medium);
+    --z-alert-close-customed-font-size: var(--z-font-size-base);
+    --z-alert-icon-size: var(--z-font-size-medium);
+    --z-alert-icon-large-size: 28px;
+}
+
+.z-alert {
+    width: 100%;
+    padding: var(--z-alert-padding);
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: var(--z-alert-border-radius-base);
+    position: relative;
+    background-color: var(--z-color-white);
+    overflow: hidden;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    transition: opacity var(--z-transition-duration-fast);
+
+    &.is-center{
+        justify-content: center;
+    }
+
+    & .z-alert-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+
+    }
+
+    & .z-alert__close-btn {
+        font-size: var(--z-alert-close-font-size);
+        opacity: 1;
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        cursor: pointer;
+
+        &.is_customed{
+            font-style: normal;
+            font-size: var(--z-alert-close-customed-font-size);
+            line-height: 24px;
+            top: 8px;
+        }
+    }
+
+    & .z-alert__icon{
+        font-size: var(--z-alert-icon-size);
+        width: var(--z-alert-icon-size);
+        margin-right: 8px;
+    }
+}
+
+.z-alert__title {
+    font-size: var(--z-alert-title-font-size);
+    line-height: 24px;
+}
+
+@each $val in primary, success, warning, info, error {
+    .z-alert--$(val).is-light {
+        background-color: var(--z-color-$(val)-light-9);
+        color: var(--z-color-$(val));
+        & .z-alert__close-btn{
+            color: var(--z-text-color-placeholder);
+        }
+}
+
+.z-alert--$(val).is-dark {
+    background-color: var(--z-color-$(val));
+    color: var(--z-color-white);
+    & .z-alert__close-btn {
+        color: var(--z-color-white);
+    }
+}
+}
+
+.alert-slide-enter-active,
+.alert-slide-leave-active {
+    transition: opacity var(--z-transition-duration);
+}
+
+.alert-slide-enter-from,
+.alert-slide-leave-to {
+  opacity: 0;
+}
