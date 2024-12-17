@@ -1,5 +1,5 @@
 export interface InputProps {
-    type: string;
+    type?: string;
     size?: 'large' | 'small';
     modelValue: string;
     disabled?: boolean;
@@ -19,4 +19,8 @@ export interface InputEmits {
     (e: 'focus', value: FocusEvent): void;
     (e: 'blur', value: FocusEvent): void;
     (e: 'clear'): void;
+}
+
+export interface InputInstance {
+    ref: HTMLElement | HTMLTextAreaElement
 }

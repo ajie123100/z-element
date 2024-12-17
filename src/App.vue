@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h, onMounted, ref, watch } from "vue";
+import { h, onMounted, reactive, ref, watch } from "vue";
 import { createPopper, type Instance, type Options } from "@popperjs/core";
 import ZButton from "./components/Button/Button.vue";
 import Collapse from "./components/Collapse/Collapse.vue";
@@ -11,10 +11,12 @@ import Dropdown from "./components/Dropdown/Dropdown";
 import Message from "./components/Message/Message.vue";
 import Input from "./components/Input/Input.vue";
 import Switch from "./components/Switch/Switch.vue";
+import Select from "./components/Select/Select.vue";
 import { createMessage } from "./components/Message/method";
 import type { ButtonInstance } from "./components/Button/types";
 import type { NameType } from "./components/Collapse/types";
 import type { DropdownInstance, MenuOption } from "./components/Dropdown/types";
+import type { SelectOption } from "./components/Select/tpyes";
 const buttonRef = ref<ButtonInstance | null>(null);
 const dropdownRef = ref<DropdownInstance | null>(null);
 const overlayNode = ref<HTMLElement>()
@@ -53,9 +55,25 @@ const handleClick = () => {
 const openedValue = ref<NameType[]>(["a"]);
 const text = ref('')
 const switchValue = ref(false)
+const options2 = [
+  { label: 'hello', value: 1 },
+  { label: 'WWW', value: 2 },
+  { label: 'cnm', value: 3 },
+  { label: 'nihao', value: 4, disabled: true },
+]
+const test = ref(1)
+const test2 = ref('')
+const test3 = ref('')
+const customeRender = (node: SelectOption) => {
+  return h('div', { className: 'xyz' }, [h('b', node.label), h('span', node.value)])
+}
 </script>
 
 <template>
+  <Select v-model="test" placeholder="请选择" :options="options2" clearable></Select>
+  <Select v-model="test2" placeholder="请选择" :options="options2" clearable :render-label="customeRender"></Select>
+  <Select v-model="test3" placeholder="请选择,可以过滤" :options="options2" filterable clearable></Select>
+  <p>{{ test }}</p>
   <Switch v-model="switchValue" active-text="close" inactive-text="open" />
   <Input type="text" size="small" v-model="text" clearable show-password />
   <p>{{ text }}</p>
