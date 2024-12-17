@@ -10,6 +10,7 @@ import Tooltip from "./components/Tooltip/Tooltip.vue";
 import Dropdown from "./components/Dropdown/Dropdown";
 import Message from "./components/Message/Message.vue";
 import Input from "./components/Input/Input.vue";
+import Switch from "./components/Switch/Switch.vue";
 import { createMessage } from "./components/Message/method";
 import type { ButtonInstance } from "./components/Button/types";
 import type { NameType } from "./components/Collapse/types";
@@ -51,9 +52,11 @@ const handleClick = () => {
 };
 const openedValue = ref<NameType[]>(["a"]);
 const text = ref('')
+const switchValue = ref(false)
 </script>
 
 <template>
+  <Switch v-model="switchValue" active-text="close" inactive-text="open" />
   <Input type="text" size="small" v-model="text" clearable show-password />
   <p>{{ text }}</p>
   <header>
