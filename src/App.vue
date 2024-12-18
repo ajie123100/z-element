@@ -17,6 +17,9 @@ import type { ButtonInstance } from "./components/Button/types";
 import type { NameType } from "./components/Collapse/types";
 import type { DropdownInstance, MenuOption } from "./components/Dropdown/types";
 import type { SelectOption } from "./components/Select/tpyes";
+import Form from "./components/Form/Form.vue";
+import FormItem from "./components/Form/FormItem.vue";
+import type { FormRules } from "./components/Form/types";
 const buttonRef = ref<ButtonInstance | null>(null);
 const dropdownRef = ref<DropdownInstance | null>(null);
 const overlayNode = ref<HTMLElement>()
@@ -67,9 +70,26 @@ const test3 = ref('')
 const customeRender = (node: SelectOption) => {
   return h('div', { className: 'xyz' }, [h('b', node.label), h('span', node.value)])
 }
+const sss = reactive({
+  name: '',
+  phone: ''
+})
+const formRef = ref()
+const rules: FormRules = {
+  name: [{ type: 'string', required: true, trigger: 'blur' }],
+  phone: [{ type: 'string', required: true, trigger: 'blur' }],
+}
 </script>
 
 <template>
+  <Form :model="sss" :rules="rules" ref="formRef">
+    <FormItem label="name" prop="name">
+      <Input v-model="sss.name" />
+    </FormItem>
+    <FormItem label="phone" prop="phone">
+      <Input v-model="sss.phone" />
+    </FormItem>
+  </Form>
   <Select v-model="test" placeholder="请选择" :options="options2" clearable></Select>
   <Select v-model="test2" placeholder="请选择" :options="options2" clearable :render-label="customeRender"></Select>
   <Select v-model="test3" placeholder="请选择,可以过滤" :options="options2" filterable clearable></Select>
